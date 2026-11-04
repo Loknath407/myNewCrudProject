@@ -1,0 +1,62 @@
+
+@model IEnumerable<MyNewCrudProject.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Employee Management</h2>
+            <p class="text-muted">Manage your employee records</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">
+            + Add Employee
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var employee in Model)
+                    {
+                        <tr>
+                            <td>@employee.Id</td>
+                            <td>@employee.Name</td>
+                            <td>@employee.Email</td>
+                            <td>
+                                <span class="badge bg-info text-dark">
+                                    @employee.Department
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="Details"
+                                   asp-route-id="@employee.Id"
+                                   class="btn btn-sm btn-outline-info">Details</a>
+                                <a asp-action="Edit"
+                                   asp-route-id="@employee.Id"
+                                   class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a asp-action="Delete"
+                                   asp-route-id="@employee.Id"
+                                   class="btn btn-sm btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
